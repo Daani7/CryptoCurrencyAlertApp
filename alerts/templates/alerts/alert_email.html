@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <title>Alerte Cryptomonnaie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        strong {
+            color: #ff5733;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Alerte Cryptomonnaie</h2>
+        <p><strong>Nom de l'alerte :</strong> {{ alert.name }}</p>
+        <p><strong>Cryptomonnaie :</strong> {{ alert.cryptocurrency }}</p>
+        <p><strong>Date de création :</strong> {{ alert.created_date|date:"d/m/Y H:i:s" }}</p>
+        <p>Le prix est actuellement de <strong>{{ alert.price }}</strong> USD.</p>
+        <p><strong>Message :</strong> {{ alert.message }}</p>
+    </div>
+</body>
+</html>

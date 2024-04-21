@@ -1,0 +1,133 @@
+{% extends 'alerts/base.html' %}
+{% block title %}Liste des Alertes{% endblock %}
+
+{% block content %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.create-alert-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.alert-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert-table th, .alert-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.alert-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #333;
+}
+
+.alert-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.alert-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.details-link {
+    color: #007bff;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #007bff;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 0 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+</style>
+
+<h1>Liste des Alertes Crypto</h1>
+<a href="{% url 'create_alert' %}" class="create-alert-link">Créer une alerte</a>
+<br><br>
+<table class="alert-table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Type d'alerte</th>
+            <th>Date de création</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for alert_item in alerts %}
+            <tr>
+                <td>{{ alert_item.name }}</td>
+                <td>{{ alert_item.price }}</td>
+                <td>{{ alert_item.get_alert_type_display }}</td>
+                <td>{{ alert_item.created_date|date:"d/m/Y H:i:s" }}</td>
+                <td><a href="{% url 'show_alert' alert_item.id %}" class="details-link">Voir détails</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if alerts.has_previous %}
+            <a href="?page=1">&laquo; Première</a>
+            <a href="?page={{ alerts.previous_page_number }}">Précédente</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ alerts.number }} de {{ alerts.paginator.num_pages }}.
+        </span>
+
+        {% if alerts.has_next %}
+            <a href="?page={{ alerts.next_page_number }}">Suivante</a>
+            <a href="?page={{ alerts.paginator.num_pages }}">Dernière &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

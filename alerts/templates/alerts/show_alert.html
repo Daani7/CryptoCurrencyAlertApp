@@ -1,0 +1,90 @@
+{% extends 'alerts/base.html' %}
+{% block title %}Détail de l'Alerte{% endblock %}
+
+{% block content %}
+<style>
+  /* Conteneur principal */
+.container {
+  max-width: 600px; /* Largeur maximale du contenu */
+  margin: 20px auto; /* Centrage horizontal */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* Titre */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Détails de l'alerte */
+.alert-details {
+  margin-bottom: 20px;
+}
+
+.alert-details p {
+  margin-bottom: 10px;
+}
+
+/* Bouton de suppression */
+.delete-form {
+  text-align: center;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Liens */
+.action-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.action-links a {
+  margin: 0 10px;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.action-links a:hover {
+  color: #0056b3;
+}
+
+
+</style>
+<div class="container">
+  <h1>Détails</h1>
+  <div class="alert-details">
+      <p><strong>Nom:</strong> {{ alert.name }}</p>
+      <p><strong>Cryptomonnaie:</strong> {{ alert.cryptocurrency }}</p>
+      <p><strong>Date de Création:</strong> {{ alert.created_date|date:"d/m/Y H:i:s" }}</p>
+      <p><strong>Prix:</strong> {{ alert.price }}</p>
+      <p><strong>Type d'alerte:</strong> {{ alert.alert_type }}</p>
+  </div>
+
+  <form action="{% url 'delete_alert' alert.id %}" method="post" class="delete-form">
+      {% csrf_token %}
+      <button type="submit" class="delete-button">Supprimer</button>
+  </form>
+
+  <div class="action-links">
+      <a href="{% url 'update_alert' alert.id %}">Modifier</a>
+      <a href="{% url 'list_alerts' %}">Retour</a>
+  </div>
+</div>
+
+{% endblock %}

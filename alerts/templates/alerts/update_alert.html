@@ -1,0 +1,12 @@
+{% extends 'alerts/base.html' %}
+{% block title %}Modifier l'Alerte{% endblock %}
+
+{% block content %}
+    <h1>Modification</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Modifier</button>
+    </form>
+    <a href="{% url 'list_alerts' %}">Annuler</a>
+{% endblock %}
