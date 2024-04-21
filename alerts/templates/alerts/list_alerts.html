@@ -1,4 +1,5 @@
 {% extends 'alerts/base.html' %}
+
 {% block title %}Liste des Alertes{% endblock %}
 
 {% block content %}
@@ -12,15 +13,7 @@ body {
 
 h1 {
     color: #333;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+    margin-bottom: 20px;
 }
 
 .create-alert-link {
@@ -30,6 +23,11 @@ a:hover {
     padding: 10px 20px;
     border-radius: 5px;
     margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.create-alert-link:hover {
+    background-color: #0056b3;
 }
 
 .alert-table {
@@ -37,10 +35,11 @@ a:hover {
     border-collapse: collapse;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .alert-table th, .alert-table td {
-    padding: 10px;
+    padding: 12px; /* Augmentation du rembourrage */
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -61,6 +60,11 @@ a:hover {
 
 .details-link {
     color: #007bff;
+    text-decoration: none;
+}
+
+.details-link:hover {
+    text-decoration: underline;
 }
 
 .pagination {
@@ -83,13 +87,11 @@ a:hover {
     background-color: #007bff;
     color: #fff;
 }
-
-
 </style>
 
 <h1>Liste des Alertes Crypto</h1>
 <a href="{% url 'create_alert' %}" class="create-alert-link">Créer une alerte</a>
-<br><br>
+
 <table class="alert-table">
     <thead>
         <tr>
